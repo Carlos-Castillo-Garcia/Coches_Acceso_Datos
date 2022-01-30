@@ -1,13 +1,28 @@
 package com.eep.Coches.Entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="Coches")
 public class Coches {
 
+    @Id
+    @GeneratedValue
+    @Column(name="id")
+    private int id;
+    @Column(name = "nbastidor")
     String nbastidor;
+    @Column(name = "modelo")
     String modelo;
+    @Column(name = "marca")
     String marca;
+    @Column(name = "kilometros")
     int kilometros;
+    @Column(name = "motor")
     String motor;
+    @Column(name = "modificaciones")
     int modificaciones;
+    @Column(name = "tipo_modificaciones")
     String tipo_modificaciones;
 
     public Coches() {

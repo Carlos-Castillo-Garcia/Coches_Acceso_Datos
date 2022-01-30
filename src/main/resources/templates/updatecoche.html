@@ -5,6 +5,15 @@
     <title>Title</title>
 </head>
 <body>
-
+<form action="#"  th:action="@{/coches/addcochespost}" th:objetct="${coche}" method="post">
+    <p>nbastidor: <input type="text" th:field="${coche.nbastidor}"/> </p>
+    <p>marca: <input type="text" th:field="${coche.marca}"/> </p>
+    <p>modelo: <input type="text" th:field="${coche.modelo}"/> </p>
+    <p>kilometros: <input type="number" th:field="${coche.kilometros}"/> </p>
+    <p>motor: <input type="text" th:field="${coche.motor}"/> </p>
+    <p>modificaciones: <input type="number" th:field="${coche.modificaciones}"/> </p>
+    <p>tipo_modificaciones: <input type="text" th:field="${coche.tipo_modificaciones}"/> </p>
+    <p><input type="submit" value="SUBMIT"/> </p>
+</form>
 </body>
 </html>

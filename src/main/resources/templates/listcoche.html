@@ -5,6 +5,55 @@
     <title>Title</title>
 </head>
 <body>
-
+<form action="#" method="post" id="formulario">
+    <table>
+        <thead>
+            <tr>
+                <th>Numero de Bastidor</th>
+                <th>Modelo</th>
+                <th>Marca</th>
+                <th>Kilometros</th>
+                <th>Motor</th>
+                <th>Modificaciones</th>
+                <th>Tipo de Modificaciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="coche, iterator : ${coches}">
+                <th><span th:text="${coche.nbastidor}">Nombre</span></th>
+                <th><span th:text="${coche.modelo}">Descripción</span></th>
+                <th><span th:text="${coche.marca}">Horas</span></th>
+                <th><span th:text="${coche.kilometros}">Precio</span></th>
+                <th><span th:text="${coche.motor}">Precio</span></th>
+                <th><span th:text="${coche.modificaciones}">Precio</span></th>
+                <th><span th:text="${coche.tipo_modificaciones}">Precio</span></th>
+                <th><input type="checkbox" th:value="${iterator.index}" th:name="borrado"></th>
+                <th><input type="submit" value="Actualizacion" th:name="update" onclick="updates(coche)"></th>
+            </tr>
+        </tbody>
+    </table>
+    <input type="submit" onclick="deletes()" value="Borrado">
+</form>
 </body>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script>
+    const form = document.getElementById('formulario');
+    function updates(coche) {
+        // form.setAttribute('action', '/coches/updatecochesget');
+        const otherpram={
+            header: {
+
+            },
+            body:coche,
+            method:"POST"
+        };
+        fetch("localhost:8080/coches/updatecochesget", otherpram)
+        .then(res=>console.log(res))
+        .catch(error=>console.log(error))
+    }
+    function deletes() {
+        form.setAttribute('action', '/coches/delcochesget');
+    }
+
+</script>
 </html>
