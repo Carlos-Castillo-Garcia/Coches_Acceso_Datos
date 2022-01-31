@@ -52,8 +52,8 @@ public class CochesController {
     }
 
     @PostMapping("/updatecochesget")
-    public String updatecochesget(Model model, @ModelAttribute Coches coche, @RequestBody Coches coches){
-        System.out.println(coches.toString());
+    public String updatecochesget(Model model, @RequestParam (value = "update") Coches coche){
+        System.out.println(coche.toString());
         model.addAttribute("coche", coche);
         return COCHES_UPDATE;
     }
