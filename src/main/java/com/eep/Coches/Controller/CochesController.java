@@ -2,14 +2,13 @@ package com.eep.Coches.Controller;
 
 import com.eep.Coches.Entity.Coches;
 import com.eep.Coches.ServiceImpl.CochesServiceImpl;
-import com.eep.Coches.ServiceImpl.MarcaModeloServiceImpl;
+import com.eep.Coches.ServiceImpl.MarcaServiceImpl;
+import com.eep.Coches.ServiceImpl.ModeloServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 
 @Controller
@@ -27,8 +26,12 @@ public class CochesController {
     private CochesServiceImpl cochesServiceImpl;
 
     @Autowired
-    @Qualifier("MarcaModeloServiceImpl")
-    private MarcaModeloServiceImpl marcamodeloServiceImpl;
+    @Qualifier("MarcaServiceImpl")
+    private MarcaServiceImpl marcaServiceImpl;
+
+    @Autowired
+    @Qualifier("ModeloServiceImpl")
+    private ModeloServiceImpl modeloServiceImpl;
 
     @GetMapping("/listcoche")
     public String listcoche(Model model){
@@ -59,7 +62,8 @@ public class CochesController {
 
     @GetMapping("/addcoches")
     public String addcochesget(Model model){
-        model.addAttribute("marcamodelo", marcamodeloServiceImpl.listAllMarcaModelo());
+        model.addAttribute("marcas", marcaServiceImpl.listallMarcas());
+        model.addAttribute("modelos", modeloServiceImpl.listallmodelos());
         model.addAttribute("coche", new Coches());
         return COCHES_ADD;
     }

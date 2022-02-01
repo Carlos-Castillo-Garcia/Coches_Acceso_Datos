@@ -5,13 +5,13 @@
     <title>Title</title>
 </head>
 <body>
-<form action="#"  th:action="@{/coches/addcochespost}" th:objetct="${coche}" method="post">
+<form action="#" id="formulario" th:action="@{/coches/addcochespost}" th:objetct="${coche}" method="post">
     <p>nbastidor: <input type="text" th:field="${coche.nbastidor}"/> </p>
-    <select name="" id="">
-        <option id="marca" th:each="i : ${marcamodelo.marca}" th:value="${i}" th:text="${i}"></option>
+    <select th:field="${coche.marca}" >
+        <option id="marca" th:each="i : ${marcas}" th:value="${i.marca}" th:text="${i.marca}"></option>
     </select>
-    <select name="" id="">
-        <option id="modelo" th:each="i : ${marcamodelo.modelo}" th:value="${i}" th:text="${i}"></option>
+    <select th:field="${coche.modelo}">
+        <option id="modelo" th:each="i : ${modelos}" th:value="${i.modelo}" th:text="${i.modelo}"></option>
     </select>
     <p>kilometros: <input type="number" th:field="${coche.kilometros}"/> </p>
     <p>motor: <input type="text" th:field="${coche.motor}"/> </p>
@@ -20,4 +20,8 @@
     <p><input type="submit" value="SUBMIT"/> </p>
 </form>
 </body>
+<script th:inline="javascript">
+    const form = document.getElementById('formulario');
+    const marca = document.getElementById('marca');
+</script>
 </html>

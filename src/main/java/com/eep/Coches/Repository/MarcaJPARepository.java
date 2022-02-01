@@ -1,11 +1,11 @@
 package com.eep.Coches.Repository;
 
-import com.eep.Coches.Entity.MarcaModelo;
+import com.eep.Coches.Entity.Marca;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 
-@Repository("MarcaModeloJPARepository")
-public interface MarcaModeloJPARepository  extends JpaRepository<MarcaModelo, Serializable> {
+@Repository("MarcaJPARepository")
+public interface MarcaJPARepository extends JpaRepository<Marca, Serializable> {
 }
