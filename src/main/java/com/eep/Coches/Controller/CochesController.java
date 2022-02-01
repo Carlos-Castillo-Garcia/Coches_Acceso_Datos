@@ -2,6 +2,7 @@ package com.eep.Coches.Controller;
 
 import com.eep.Coches.Entity.Coches;
 import com.eep.Coches.ServiceImpl.CochesServiceImpl;
+import com.eep.Coches.ServiceImpl.MarcaModeloServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -19,10 +20,15 @@ public class CochesController {
     public final static String COCHES_LIST = "listcoche";
     public final static String COCHES_DELETE = "delcoche";
     public final static String COCHES_UPDATE = "updatecoche";
+    public final static String MENSAJE = "mensaje_usuarios";
 
     @Autowired
     @Qualifier("CochesServiceImpl")
     private CochesServiceImpl cochesServiceImpl;
+
+    @Autowired
+    @Qualifier("MarcaModeloServiceImpl")
+    private MarcaModeloServiceImpl marcamodeloServiceImpl;
 
     @GetMapping("/listcoche")
     public String listcoche(Model model){
@@ -31,11 +37,13 @@ public class CochesController {
     }
 
     @PostMapping("/listcochesdelpost")
-    public String listcochesdelpost(@RequestParam (value = "borrado") ArrayList<Integer> ids){
+    public String listcochesdelpost(Model model, @RequestParam (value = "borrado") ArrayList<Integer> ids){
         if(ids.size() == 0){
-            return "redirect:/coches/listcoche";
+            model.addAttribute("mensaje", "No se han podido borrar los usuarios, compruebe la seleccion");
+            return MENSAJE;
         }else{
-            return "redirect:/coches/delcochesget";
+            cochesServiceImpl.delbyid(ids);
+            return "redirect:/coches/listcoche";
         }
     }
 
@@ -51,6 +59,7 @@ public class CochesController {
 
     @GetMapping("/addcoches")
     public String addcochesget(Model model){
+        model.addAttribute("marcamodelo", marcamodeloServiceImpl.listAllMarcaModelo());
         model.addAttribute("coche", new Coches());
         return COCHES_ADD;
     }

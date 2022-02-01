@@ -27,7 +27,6 @@ public class Coches {
 
     public Coches() {
     }
-
     public Coches(int id, String nbastidor, String modelo, String marca,
                   int kilometros, String motor, int modificaciones, String tipo_modificaciones) {
         this.nbastidor = nbastidor;

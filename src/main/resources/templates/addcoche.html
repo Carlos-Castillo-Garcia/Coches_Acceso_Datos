@@ -8,10 +8,10 @@
 <form action="#"  th:action="@{/coches/addcochespost}" th:objetct="${coche}" method="post">
     <p>nbastidor: <input type="text" th:field="${coche.nbastidor}"/> </p>
     <select name="" id="">
-        <option id="marca" th:each="i : ${marcas}" th:value="${i}" th:text="${i}"></option>
+        <option id="marca" th:each="i : ${marcamodelo.marca}" th:value="${i}" th:text="${i}"></option>
     </select>
     <select name="" id="">
-        <option id="modelo" th:each="i : ${modelo}" th:value="${i}" th:text="${i}"></option>
+        <option id="modelo" th:each="i : ${marcamodelo.modelo}" th:value="${i}" th:text="${i}"></option>
     </select>
     <p>kilometros: <input type="number" th:field="${coche.kilometros}"/> </p>
     <p>motor: <input type="text" th:field="${coche.motor}"/> </p>
