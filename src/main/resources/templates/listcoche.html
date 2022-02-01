@@ -28,7 +28,7 @@
                 <th><span th:text="${coche.modificaciones}">Precio</span></th>
                 <th><span th:text="${coche.tipo_modificaciones}">Precio</span></th>
                 <th><input type="checkbox" th:value="${iterator.index}" th:name="borrado"></th>
-                <th><input type="submit" th:value="${coche}" th:name="update" onclick="updates()"></th>
+                <th><input type="submit"  th:value="${coche.id}" th:name="update" onclick="updates()"></th>
             </tr>
         </tbody>
     </table>
@@ -39,21 +39,10 @@
 <script th:inline="javascript">
     const form = document.getElementById('formulario');
     function updates() {
-        form.setAttribute('action', '/coches/updatecochesget');
-        // const otherpram={
-        //     header: {
-        //
-        //     },
-        //     body: coche,
-        //     method:"post"
-        // };
-        // fetch("localhost:8080/coches/updatecochesget", otherpram)
-        // .then(res=>console.log(res))
-        // .catch(error=>console.log(error))
+        form.setAttribute('action', '/coches/listcochesupdatepost');
     }
     function deletes() {
-        form.setAttribute('action', '/coches/delcochesget');
+        form.setAttribute('action', '/coches/listcochesdelpost');
     }
-
 </script>
 </html>

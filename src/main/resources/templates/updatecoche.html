@@ -6,6 +6,7 @@
 </head>
 <body>
 <form action="#"  th:action="@{/coches/addcochespost}" th:objetct="${coche}" method="post">
+    <p><input type="hidden" th:field="${coche.id}"></p>
     <p>nbastidor: <input type="text" th:field="${coche.nbastidor}"/> </p>
     <p>marca: <input type="text" th:field="${coche.marca}"/> </p>
     <p>modelo: <input type="text" th:field="${coche.modelo}"/> </p>

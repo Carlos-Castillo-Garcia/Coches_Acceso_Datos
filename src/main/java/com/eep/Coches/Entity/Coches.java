@@ -28,7 +28,7 @@ public class Coches {
     public Coches() {
     }
 
-    public Coches(String nbastidor, String modelo, String marca,
+    public Coches(int id, String nbastidor, String modelo, String marca,
                   int kilometros, String motor, int modificaciones, String tipo_modificaciones) {
         this.nbastidor = nbastidor;
         this.modelo = modelo;
@@ -39,6 +39,9 @@ public class Coches {
         this.tipo_modificaciones = tipo_modificaciones;
     }
 
+    public int getId(){
+        return id;
+    }
     public String getNbastidor() {
         return nbastidor;
     }
@@ -59,6 +62,10 @@ public class Coches {
     }
     public String getTipo_modificaciones() {
         return tipo_modificaciones;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     public void setNbastidor(String nbastidor) {
         this.nbastidor = nbastidor;

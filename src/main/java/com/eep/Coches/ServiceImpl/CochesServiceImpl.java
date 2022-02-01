@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service("CochesServiceImpl")
 public class CochesServiceImpl  implements CochesService {
@@ -38,5 +39,11 @@ public class CochesServiceImpl  implements CochesService {
     public Coches updateCoches(Coches coches) {
         cochesJPARepository.save(coches);
         return null;
+    }
+
+    @Override
+    public Optional<Coches> findbyid(int id) {
+        Optional<Coches> coche_id = cochesJPARepository.findById(id);
+        return coche_id;
     }
 }

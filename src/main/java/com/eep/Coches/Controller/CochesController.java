@@ -30,6 +30,25 @@ public class CochesController {
         return COCHES_LIST;
     }
 
+    @PostMapping("/listcochesdelpost")
+    public String listcochesdelpost(@RequestParam (value = "borrado") ArrayList<Integer> ids){
+        if(ids.size() == 0){
+            return "redirect:/coches/listcoche";
+        }else{
+            return "redirect:/coches/delcochesget";
+        }
+    }
+
+    @PostMapping("/listcochesupdatepost")
+    public String listcochesupdatepost(@RequestParam (value = "update") Integer id, Model model){
+        if (id == null){
+            return "redirect:/coches/listcoche";
+        }else{
+            model.addAttribute("coche", cochesServiceImpl.findbyid(id));
+            return COCHES_UPDATE;
+        }
+    }
+
     @GetMapping("/addcoches")
     public String addcochesget(Model model){
         model.addAttribute("coche", new Coches());
@@ -42,19 +61,9 @@ public class CochesController {
         return "redirect:/coches/listcoche";
     }
 
-    @PostMapping("/delcochesget")
-    public String delcochesget(@RequestParam (value = "borrado") ArrayList<Integer> ids){
-        if(ids.size() == 0){
-            return "redirect:/coches/listcoche";
-        }else{
-            return COCHES_DELETE;
-        }
-    }
-
-    @PostMapping("/updatecochesget")
-    public String updatecochesget(Model model, @RequestParam (value = "update") Coches coche){
-        System.out.println(coche.toString());
-        model.addAttribute("coche", coche);
-        return COCHES_UPDATE;
+    @PostMapping("/updatecochespost")
+    public String updatecochespost(@ModelAttribute Coches coche){
+        cochesServiceImpl.updateCoches(coche);
+        return "redirect:/coches/listcoche";
     }
 }
