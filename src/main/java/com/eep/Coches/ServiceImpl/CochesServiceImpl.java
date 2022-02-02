@@ -1,6 +1,7 @@
 package com.eep.Coches.ServiceImpl;
 
 import com.eep.Coches.Entity.Coches;
+import com.eep.Coches.Entity.Modelo;
 import com.eep.Coches.Repository.CochesJPARepository;
 import com.eep.Coches.Service.CochesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,11 @@ public class CochesServiceImpl  implements CochesService {
     @Override
     public List<Coches> listAllCoches() {
         List<Coches> coches = cochesJPARepository.findAll();
-        return coches;
+        List<Coches> coches_marca_modelo = new ArrayList<>();
+        for (int i = 0; i < coches.size(); i++){
+            coches_marca_modelo.add(setter_marca_modelo(coches.get(i)));
+        }
+        return coches_marca_modelo;
     }
 
     @Override
@@ -58,4 +63,33 @@ public class CochesServiceImpl  implements CochesService {
             cochesJPARepository.deleteById(ids.get(i));
         }
     }
+
+    @Override
+    public Coches setter_marca_modelo(Coches coches) {
+        MarcaServiceImpl marcaService = new MarcaServiceImpl();
+        ModeloServiceImpl modeloService = new ModeloServiceImpl();
+        Coches coche = coches;
+
+        coche.setModelo(modeloService.findByid(coches).get().getModelo());
+        coche.setMarca(marcaService.findbyid(coches).get().getMarca());
+        return coche;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

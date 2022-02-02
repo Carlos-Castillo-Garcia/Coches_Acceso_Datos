@@ -13,4 +13,5 @@ public interface CochesService {
     public abstract Coches updateCoches (Coches coches);
     public abstract Optional<Coches> findbyid(int id);
     public abstract void delbyid (ArrayList<Integer> ids);
+    public abstract Coches setter_marca_modelo (Coches coches);
 }

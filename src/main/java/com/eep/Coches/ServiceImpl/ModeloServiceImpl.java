@@ -1,6 +1,7 @@
 package com.eep.Coches.ServiceImpl;
 
 
+import com.eep.Coches.Entity.Coches;
 import com.eep.Coches.Entity.Marca;
 import com.eep.Coches.Entity.Modelo;
 import com.eep.Coches.Repository.ModeloJPARepository;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service("ModeloServiceImpl")
 public class ModeloServiceImpl implements ModeloService {
@@ -26,5 +28,14 @@ public class ModeloServiceImpl implements ModeloService {
     @Override
     public List<Modelo> listmodelosbyMarca(Marca marca) {
         return modeloJPARepository.findByIdmarca(marca);
+    }
+
+    @Override
+    public Optional<Modelo> findByid(Coches coches) {
+        int id = Integer.parseInt(coches.getModelo());
+        System.out.println(id);
+        Optional<Modelo> modelo = modeloJPARepository.findById(Integer.parseInt(coches.getModelo()));
+        System.out.println(modelo);
+        return modelo;
     }
 }
