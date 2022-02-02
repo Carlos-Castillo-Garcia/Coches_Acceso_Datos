@@ -5,13 +5,13 @@
     <title>Title</title>
 </head>
 <body>
-<form action="#" id="formulario" th:action="@{/coches/addcochespost}" th:objetct="${coche}" method="post">
+<form action="#" name="formulario" th:action="@{/coches/addcochespost}" th:objetct="${coche}" method="post">
     <p>nbastidor: <input type="text" th:field="${coche.nbastidor}"/> </p>
-    <select th:field="${coche.marca}" >
-        <option id="marca" th:each="i : ${marcas}" th:value="${i.marca}" th:text="${i.marca}"></option>
+    <select th:field="${coche.marca}" name="marca" onchange="select2()">
+        <option id="marca" th:each="i : ${marcas}" th:value="${i.id}" th:text="${i.marca}"></option>
     </select>
     <select th:field="${coche.modelo}">
-        <option id="modelo" th:each="i : ${modelos}" th:value="${i.modelo}" th:text="${i.modelo}"></option>
+        <option id="modelo" value=""></option>
     </select>
     <p>kilometros: <input type="number" th:field="${coche.kilometros}"/> </p>
     <p>motor: <input type="text" th:field="${coche.motor}"/> </p>
@@ -21,7 +21,24 @@
 </form>
 </body>
 <script th:inline="javascript">
-    const form = document.getElementById('formulario');
     const marca = document.getElementById('marca');
+    var modelos = [[${modelos}]];
+    var nuevos_modelos = [];
+    function select2(){
+        var marca = document.formulario.marca[document.formulario.marca.selectedIndex].value
+        console.log(marca)
+        if(marca != 0){
+            console.log(Object.values(modelos[1])[2])
+            for (let i = 0; i < modelos.length; i++) {
+
+                if (Object.values(modelos[i])[2] === marca.value){
+                    console.log(modelos[i])
+                    // nuevos_modelos.push(modelos[i])
+                }
+            }
+        }
+        console.log(nuevos_modelos)
+    }
+
 </script>
 </html>
