@@ -1,8 +1,11 @@
 package com.eep.Coches.ServiceImpl;
 
 import com.eep.Coches.Entity.Coches;
+import com.eep.Coches.Entity.Marca;
 import com.eep.Coches.Entity.Modelo;
 import com.eep.Coches.Repository.CochesJPARepository;
+import com.eep.Coches.Repository.MarcaJPARepository;
+import com.eep.Coches.Repository.ModeloJPARepository;
 import com.eep.Coches.Service.CochesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,6 +21,12 @@ public class CochesServiceImpl  implements CochesService {
     @Autowired
     @Qualifier("CochesJPARepository")
     private CochesJPARepository cochesJPARepository;
+    @Autowired
+    @Qualifier("MarcaJPARepository")
+    private MarcaJPARepository marcaJPARepository;
+    @Autowired
+    @Qualifier("ModeloJPARepository")
+    private ModeloJPARepository modeloJPARepository;
 
     @Override
     public List<Coches> listAllCoches() {
@@ -65,31 +74,16 @@ public class CochesServiceImpl  implements CochesService {
     }
 
     @Override
-    public Coches setter_marca_modelo(Coches coches) {
-        MarcaServiceImpl marcaService = new MarcaServiceImpl();
-        ModeloServiceImpl modeloService = new ModeloServiceImpl();
+    public Coches setter_marca_modelo(Coches coches){
         Coches coche = coches;
 
-        coche.setModelo(modeloService.findByid(coches).get().getModelo());
-        coche.setMarca(marcaService.findbyid(coches).get().getMarca());
+        Optional<Marca> set_marca = marcaJPARepository.findById(Integer.parseInt(coche.getMarca()));
+        Optional<Modelo> set_modelo = modeloJPARepository.findById(Integer.parseInt(coche.getModelo()));
+
+        coche.setMarca(set_marca.get().getMarca());
+        coche.setModelo(set_modelo.get().getModelo());
+
         return coche;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

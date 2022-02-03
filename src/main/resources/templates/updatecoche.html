@@ -5,11 +5,16 @@
     <title>Title</title>
 </head>
 <body>
-<form action="#"  th:action="@{/coches/addcochespost}" th:objetct="${coche}" method="post">
+<form action="#" name="formulario" th:action="@{/coches/addcochespost}" th:objetct="${coche}" method="post">
     <p><input type="hidden" th:field="${coche.id}"></p>
     <p>nbastidor: <input type="text" th:field="${coche.nbastidor}"/> </p>
-    <p>marca: <input type="text" th:field="${coche.marca}"/> </p>
-    <p>modelo: <input type="text" th:field="${coche.modelo}"/> </p>
+    <select th:field="${coche.marca}" name="marca" onchange="select2()">
+        <option id="marca_nulo" value="0">-</option>
+        <option id="marca" th:each="i : ${marcas}" th:value="${i.id}" th:text="${i.marca}"></option>
+    </select>
+    <select th:field="${coche.modelo}" name="modelo">
+        <option value="0">-</option>
+    </select>
     <p>kilometros: <input type="number" th:field="${coche.kilometros}"/> </p>
     <p>motor: <input type="text" th:field="${coche.motor}"/> </p>
     <p>modificaciones: <input type="number" th:field="${coche.modificaciones}"/> </p>
@@ -17,4 +22,39 @@
     <p><input type="submit" value="SUBMIT"/> </p>
 </form>
 </body>
+<script th:inline="javascript">
+    const marca = document.getElementById('marca');
+    var modelos = [[${modelos}]];
+    if (document.formulario.marca.selectedIndex != 0){
+        select2();
+    }
+    function select2(){
+        var modelos_filtrados = [];
+        var id_modelos_filtrados = [];
+        var maximo_tamaño_en_borrado = 2;
+        var list_vacio = 0;
+        var largo_modelo = document.formulario.modelo.options.length;
+        if(largo_modelo >= maximo_tamaño_en_borrado){
+            for (let i = largo_modelo; i >= 0; i--) {
+                document.formulario.modelo.options.remove(i);
+            }
+        }
+        var marca = document.formulario.marca[document.formulario.marca.selectedIndex].value;
+        if(marca != list_vacio){
+            for (let i = 0; i < modelos.length; i++) {
+                var id_marca_modelo = String(Object.values(modelos[i])[2]);
+                if (id_marca_modelo === marca){
+                    modelos_filtrados.push(Object.values(modelos[i])[1]);
+                    id_modelos_filtrados.push(Object.values(modelos[i])[0]);
+                }
+            }
+            document.formulario.modelo.length = modelos_filtrados.length;
+            for (let j = 0; j < modelos_filtrados.length; j++) {
+                document.formulario.modelo.options[j].value=String(id_modelos_filtrados[j]);
+                document.formulario.modelo.options[j].text=String(modelos_filtrados[j]);
+            }
+        }
+        document.formulario.modelo.options[0].selected = true;
+    }
+</script>
 </html>

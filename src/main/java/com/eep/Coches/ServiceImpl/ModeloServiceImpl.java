@@ -31,11 +31,8 @@ public class ModeloServiceImpl implements ModeloService {
     }
 
     @Override
-    public Optional<Modelo> findByid(Coches coches) {
-        int id = Integer.parseInt(coches.getModelo());
-        System.out.println(id);
-        Optional<Modelo> modelo = modeloJPARepository.findById(Integer.parseInt(coches.getModelo()));
-        System.out.println(modelo);
+    public Optional<Modelo> findbyid(int id) {
+        Optional<Modelo> modelo = modeloJPARepository.findById(id);
         return modelo;
     }
 }

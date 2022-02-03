@@ -23,10 +23,11 @@ public class MarcaServiceImpl implements MarcaService {
         return marcaJPARepository.findAll();
     }
 
-     @Override
-     public Optional<Marca> findbyid(Coches coches) {
-
-        Optional<Marca> marca = marcaJPARepository.findById(Integer.parseInt(coches.getMarca()));
-         return marca;
-     }
- }
+    @Override
+    public Optional<Marca> findbyid(Coches coches) {
+        int id = Integer.parseInt(coches.getMarca());
+        System.out.println(id);
+        Optional<Marca> marca = marcaJPARepository.findById(id);
+        return marca;
+    }
+}

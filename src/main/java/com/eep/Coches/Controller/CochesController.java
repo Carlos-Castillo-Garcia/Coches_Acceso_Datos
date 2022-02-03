@@ -55,6 +55,8 @@ public class CochesController {
         if (id == null){
             return "redirect:/coches/listcoche";
         }else{
+            model.addAttribute("marcas", marcaServiceImpl.listallMarcas());
+            model.addAttribute("modelos", modeloServiceImpl.listallmodelos());
             model.addAttribute("coche", cochesServiceImpl.findbyid(id));
             return COCHES_UPDATE;
         }

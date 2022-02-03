@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface ModeloService {
     public abstract List<Modelo> listallmodelos();
     public abstract List<Modelo> listmodelosbyMarca(Marca marca);
-    public abstract Optional<Modelo> findByid(Coches coches);
+    public abstract Optional<Modelo> findbyid(int id);
 }

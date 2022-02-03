@@ -10,8 +10,8 @@
         <thead>
             <tr>
                 <th>Numero de Bastidor</th>
-                <th>Modelo</th>
                 <th>Marca</th>
+                <th>Modelo</th>
                 <th>Kilometros</th>
                 <th>Motor</th>
                 <th>Modificaciones</th>
@@ -20,13 +20,13 @@
         </thead>
         <tbody>
             <tr th:each="coche, iterator : ${coches}">
-                <th><span th:text="${coche.nbastidor}">Nombre</span></th>
-                <th><span th:text="${coche.modelo}">Descripción</span></th>
-                <th><span th:text="${coche.marca}">Horas</span></th>
-                <th><span th:text="${coche.kilometros}">Precio</span></th>
-                <th><span th:text="${coche.motor}">Precio</span></th>
-                <th><span th:text="${coche.modificaciones}">Precio</span></th>
-                <th><span th:text="${coche.tipo_modificaciones}">Precio</span></th>
+                <th><span th:text="${coche.nbastidor}"></span></th>
+                <th><span th:text="${coche.marca}"></span></th>
+                <th><span th:text="${coche.modelo}"></span></th>
+                <th><span th:text="${coche.kilometros}"></span></th>
+                <th><span th:text="${coche.motor}"></span></th>
+                <th><span th:text="${coche.modificaciones}"></span></th>
+                <th><span th:text="${coche.tipo_modificaciones}"></span></th>
                 <th><input type="checkbox" th:value="${iterator.index}" th:name="borrado"></th>
                 <th><input type="submit"  th:value="${coche.id}" th:name="update" onclick="updates()"></th>
             </tr>
