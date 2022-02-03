@@ -8,17 +8,11 @@ import org.springframework.stereotype.Component;
 public class CochesComponent {
     private static final Log LOG = LogFactory.getLog(CochesComponent.class);
 
-    public void addcoche(String texto){
+    public void Correcto(String texto){
         LOG.info(texto);
     }
-    public void updatecoche(String texto){
-        LOG.info(texto);
-    }
-    public void listcoche(String texto){
-        LOG.info(texto);
-    }
-    public void dellcoche(String texto){
-        LOG.info(texto);
+    public void Error(String texto){
+        LOG.error(texto);
     }
 
 }

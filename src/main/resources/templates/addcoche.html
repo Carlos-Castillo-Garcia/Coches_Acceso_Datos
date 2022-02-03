@@ -17,50 +17,55 @@
         </div>
         <ul>
             <li id="li_1">
-                <label class="description" for="element_1">Numero de Bastido</label>
+                <label class="description">Numero de Bastido</label>
                 <div>
                     <input id="element_1" name="element_1" class="element text medium" type="text" th:field="${coche.nbastidor}"/>
                 </div>
+                    <span th:if="${#fields.hasErrors('nbastidor')}" th:errors="*{nbastidor}" style="color: red"></span>
             </li>
             <li id="li_5">
-                <label class="description" for="element_5">Marcas</label>
+                <label class="description">Marcas</label>
                 <div>
                     <select class="element select medium" id="element_5" name="element_5" th:field="${coche.marca}" onchange="select2()" >
                         <option id="marca" value="-">-</option>
                         <option id="marca" th:each="i : ${marcas}" th:value="${i.id}" th:text="${i.marca}"></option>
                     </select>
                 </div>
+                    <span th:if="${#fields.hasErrors('marca')}" th:errors="*{marca}" style="color: red"></span>
             </li>
             <li id="li_6">
-                <label class="description" for="element_6">Modelos</label>
+                <label class="description">Modelos</label>
                 <div>
                     <select class="element select medium" id="element_6" name="element_6" th:field="${coche.modelo}">
                         <option value="0">-</option>
                     </select>
                 </div>
+                    <span th:if="${#fields.hasErrors('modelo')}" th:errors="*{modelo}" style="color: red"></span>
             </li>
             <li id="li_2">
-                <label class="description" for="element_2">Kilometros</label>
+                <label class="description">Kilometros</label>
                 <div>
                     <input id="element_2" name="element_2" class="element text medium" type="number" th:field="${coche.kilometros}"/>
                 </div>
+                    <span th:if="${#fields.hasErrors('kilometros')}" th:errors="*{kilometros}" style="color: red"></span>
             </li>
             <li id="li_3">
-                <label class="description" for="element_2">Motor</label>
+                <label class="description">Motor</label>
                 <div>
                     <input id="element_3" name="element_3" class="element text medium" type="text" th:field="${coche.motor}"/>
                 </div>
+                    <span th:if="${#fields.hasErrors('motor')}" th:errors="*{motor}" style="color: red"></span>
             </li>
             <li id="li_4">
-                <label class="description" for="element_3">Modificaciones</label>
+                <label class="description">Modificaciones</label>
                 <div>
                     <input id="element_4" name="element_4" class="element text medium" type="number" th:field="${coche.modificaciones}"/>
                 </div>
             </li>
             <li id="li_7">
-                <label class="description" for="element_4">Tipo Modificaciones </label>
+                <label class="description">Tipo Modificaciones </label>
                 <div>
-                    <input id="element_7" name="element_7" class="element text medium" type="text" maxlength="255" th:field="${coche.tipo_modificaciones}"/>
+                    <input id="element_7" name="element_7" class="element text medium" type="text" th:field="${coche.tipo_modificaciones}"/>
                 </div>
             </li>
 
@@ -76,21 +81,42 @@
 </div>
 </body>
 <script th:inline="javascript">
+    /*Variable obtener el valor de marca que esta seleccionado*/
     const marca = document.getElementById('marca');
+    /*listado de todos los modelos*/
     var modelos = [[${modelos}]];
+
+    /*Funcion para filtrar y mostrar los modelos de los coches*/
     function select2(){
+        /*listado para guardar los modelos */
         var modelos_filtrados = [];
+
+        /*listado de de los ids ya filtrados*/
         var id_modelos_filtrados = [];
+
+        /*Variable de limpiado de lista*/
         var maximo_tamano_en_borrado = 2;
+
+        /*Variable para comprobacion de seleccion de marca*/
         var list_vacio = 0;
+
+        /*Variable para obtener el largo de los modelos*/
         var largo_modelo = document.formulario.element_6.options.length;
+
+        /*if de limpiado de modelos*/
         if(largo_modelo >= maximo_tamano_en_borrado){
             for (let i = largo_modelo; i >= 0; i--) {
                 document.formulario.element_6.options.remove(i);
             }
         }
+
+        /*optencio del valor de marca*/
         var marca = document.formulario.element_5[document.formulario.element_5.selectedIndex].value;
+
+        /*if comprobante de valor seleccionado de marca*/
         if(marca != list_vacio){
+
+            /*bucle para obtener los modelos filtrados*/
             for (let i = 0; i < modelos.length; i++) {
                 var id_marca_modelo = String(Object.values(modelos[i])[2]);
                 if (id_marca_modelo === marca){
@@ -98,13 +124,16 @@
                     id_modelos_filtrados.push(Object.values(modelos[i])[0]);
                 }
             }
+
+            /*obtencion del largo de los modelos filtrados*/
             document.formulario.element_6.length = modelos_filtrados.length;
+
+            /*bucle para la insercion de los valores en los options de los modelos*/
             for (let j = 0; j < modelos_filtrados.length; j++) {
                 document.formulario.element_6.options[j].value=String(id_modelos_filtrados[j]);
                 document.formulario.element_6.options[j].text=String(modelos_filtrados[j]);
             }
         }
-        document.formulario.modelo.options[0].selected = true;
     }
 </script>
 </html>

@@ -16,6 +16,7 @@
             <p>Este formulario es para añadir un coche</p>
         </div>
         <ul>
+            <input type="hidden" th:field="${coche.id}"/>
             <li id="li_1">
                 <label class="description" for="element_1">Numero de Bastido</label>
                 <div>
@@ -76,28 +77,47 @@
 </div>
 </body>
 <script th:inline="javascript">
+    /*Variable obtener el valor de marca que esta seleccionado*/
     const marca = document.getElementById('marca');
+    /*listado de todos los modelos*/
     var modelos = [[${modelos}]];
-    // var coche = [[${coche}]];
+
+    /*if para la ejecucion de la funcion y asi obtener el listado de los modelos del coche seleccionado*/
     if (document.formulario.element_5.selectedIndex != 0){
         select2();
-        // for (let i = 0; i < document.formulario.element_6.options.length; i++) {
-        //     document.formulario.element_6.options.selectedIndex = Object.values(coche[3]);
-        // }
     }
+
+    /*Funcion para filtrar y mostrar los modelos de los coches*/
     function select2(){
+        /*listado para guardar los modelos */
         var modelos_filtrados = [];
+
+        /*listado de de los ids ya filtrados*/
         var id_modelos_filtrados = [];
+
+        /*Variable de limpiado de lista*/
         var maximo_tamano_en_borrado = 2;
+
+        /*Variable para comprobacion de seleccion de marca*/
         var list_vacio = 0;
+
+        /*Variable para obtener el largo de los modelos*/
         var largo_modelo = document.formulario.element_6.options.length;
+
+        /*if de limpiado de modelos*/
         if(largo_modelo >= maximo_tamano_en_borrado){
             for (let i = largo_modelo; i >= 0; i--) {
                 document.formulario.element_6.options.remove(i);
             }
         }
+
+        /*optencio del valor de marca*/
         var marca = document.formulario.element_5[document.formulario.element_5.selectedIndex].value;
+
+        /*if comprobante de valor seleccionado de marca*/
         if(marca != list_vacio){
+
+            /*bucle para obtener los modelos filtrados*/
             for (let i = 0; i < modelos.length; i++) {
                 var id_marca_modelo = String(Object.values(modelos[i])[2]);
                 if (id_marca_modelo === marca){
@@ -105,13 +125,16 @@
                     id_modelos_filtrados.push(Object.values(modelos[i])[0]);
                 }
             }
+
+            /*obtencion del largo de los modelos filtrados*/
             document.formulario.element_6.length = modelos_filtrados.length;
+
+            /*bucle para la insercion de los valores en los options de los modelos*/
             for (let j = 0; j < modelos_filtrados.length; j++) {
                 document.formulario.element_6.options[j].value=String(id_modelos_filtrados[j]);
                 document.formulario.element_6.options[j].text=String(modelos_filtrados[j]);
             }
         }
-        document.formulario.element_6.options[0].selected = true;
     }
 </script>
 </html>

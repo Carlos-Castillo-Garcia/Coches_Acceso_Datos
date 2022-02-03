@@ -3,6 +3,7 @@ package com.eep.Coches.ServiceImpl;
 import com.eep.Coches.Entity.Coches;
 import com.eep.Coches.Entity.Marca;
 import com.eep.Coches.Entity.Modelo;
+import com.eep.Coches.Model.CocheModel;
 import com.eep.Coches.Repository.CochesJPARepository;
 import com.eep.Coches.Repository.MarcaJPARepository;
 import com.eep.Coches.Repository.ModeloJPARepository;
@@ -21,9 +22,11 @@ public class CochesServiceImpl  implements CochesService {
     @Autowired
     @Qualifier("CochesJPARepository")
     private CochesJPARepository cochesJPARepository;
+
     @Autowired
     @Qualifier("MarcaJPARepository")
     private MarcaJPARepository marcaJPARepository;
+
     @Autowired
     @Qualifier("ModeloJPARepository")
     private ModeloJPARepository modeloJPARepository;
@@ -82,6 +85,22 @@ public class CochesServiceImpl  implements CochesService {
 
         coche.setMarca(set_marca.get().getMarca());
         coche.setModelo(set_modelo.get().getModelo());
+
+        return coche;
+    }
+
+    @Override
+    public Coches ModelaEntityCoche(CocheModel cochemodel) {
+        Coches coche = new Coches();
+
+        coche.setId(cochemodel.getId());
+        coche.setNbastidor(cochemodel.getNbastidor());
+        coche.setMarca(cochemodel.getMarca());
+        coche.setModelo(cochemodel.getModelo());
+        coche.setMotor(cochemodel.getMotor());
+        coche.setKilometros(cochemodel.getKilometros());
+        coche.setModificaciones(cochemodel.getModificaciones());
+        coche.setTipo_modificaciones(cochemodel.getTipo_modificaciones());
 
         return coche;
     }
