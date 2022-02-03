@@ -9,17 +9,16 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.ArrayList;
 
 @Controller
-@RequestMapping("/coches")
 public class CochesController {
 
     public final static String COCHES_ADD = "addcoche";
-    public final static String COCHES_LIST = "listcoche";
+    public final static String COCHES_LIST = "index";
     public final static String COCHES_DELETE = "delcoche";
     public final static String COCHES_UPDATE = "updatecoche";
-    public final static String MENSAJE = "mensaje_usuarios";
 
     @Autowired
     @Qualifier("CochesServiceImpl")
@@ -33,28 +32,24 @@ public class CochesController {
     @Qualifier("ModeloServiceImpl")
     private ModeloServiceImpl modeloServiceImpl;
 
+
     @GetMapping("/listcoche")
-    public String listcoche(Model model){
+    public String listcoche(Model model) {
         model.addAttribute("coches", cochesServiceImpl.listAllCoches());
         return COCHES_LIST;
     }
 
     @PostMapping("/listcochesdelpost")
-    public String listcochesdelpost(Model model, @RequestParam (value = "borrado") ArrayList<Integer> ids){
-        if(ids.size() == 0){
-            model.addAttribute("mensaje", "No se han podido borrar los usuarios, compruebe la seleccion");
-            return MENSAJE;
-        }else{
-            cochesServiceImpl.delbyid(ids);
-            return "redirect:/coches/listcoche";
-        }
+    public String listcochesdelpost(Model model, @RequestParam(value = "borrado") ArrayList<Integer> ids) {
+        cochesServiceImpl.delbyid(ids);
+        return "redirect:/listcoche";
     }
 
     @PostMapping("/listcochesupdatepost")
-    public String listcochesupdatepost(@RequestParam (value = "update") Integer id, Model model){
-        if (id == null){
-            return "redirect:/coches/listcoche";
-        }else{
+    public String listcochesupdatepost(@RequestParam(value = "update") Integer id, Model model) {
+        if (id == null) {
+            return "redirect:/listcoche";
+        } else {
             model.addAttribute("marcas", marcaServiceImpl.listallMarcas());
             model.addAttribute("modelos", modeloServiceImpl.listallmodelos());
             model.addAttribute("coche", cochesServiceImpl.findbyid(id));
@@ -63,7 +58,7 @@ public class CochesController {
     }
 
     @GetMapping("/addcoches")
-    public String addcochesget(Model model){
+    public String addcochesget(Model model) {
         model.addAttribute("marcas", marcaServiceImpl.listallMarcas());
         model.addAttribute("modelos", modeloServiceImpl.listallmodelos());
         model.addAttribute("coche", new Coches());
@@ -71,14 +66,14 @@ public class CochesController {
     }
 
     @PostMapping("/addcochespost")
-    public String addcochespost(@ModelAttribute Coches coche){
+    public String addcochespost(@ModelAttribute Coches coche) {
         cochesServiceImpl.addCoches(coche);
-        return "redirect:/coches/listcoche";
+        return "redirect:/listcoche";
     }
 
     @PostMapping("/updatecochespost")
-    public String updatecochespost(@ModelAttribute Coches coche){
+    public String updatecochespost(@ModelAttribute Coches coche) {
         cochesServiceImpl.updateCoches(coche);
-        return "redirect:/coches/listcoche";
+        return "redirect:/listcoche";
     }
 }

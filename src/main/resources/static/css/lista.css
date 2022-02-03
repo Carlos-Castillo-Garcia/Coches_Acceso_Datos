@@ -1,0 +1,47 @@
+#form_container
+{
+    background:#fff;
+    margin:0 auto;
+    text-align:left;
+    width:840px;
+}
+
+table{
+    margin: 5px;
+    padding: 5px;
+    border-collapse: collapse;
+}
+
+table thead tr th{
+    border: solid 2px black;
+    text-align: center;
+    padding: 10px;
+    background-color: #D3D9DF;
+}
+
+table tbody tr th{
+    border: solid 2px black;
+    text-align: center;
+    padding: 10px;
+}
+#footer{
+    width: 100%;
+}
+.button2 {
+    background-color: #4CAF50; /* Green */
+    border:none;
+    border-radius: 2px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+.button2:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.button_fuera_form{
+    margin: 5px;
+}
